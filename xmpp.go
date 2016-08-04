@@ -607,8 +607,8 @@ func (c *Client) Recv() (stanza interface{}, err error) {
 
 // Send sends the message wrapped inside an XMPP message stanza body.
 func (c *Client) Send(chat Chat) (n int, err error) {
-	return fmt.Fprintf(c.conn, "<message to='%s' type='%s' xml:lang='en'>"+"<body>%s</body></message>",
-		xmlEscape(chat.Remote), xmlEscape(chat.Type), xmlEscape(chat.Text))
+	return fmt.Fprintf(c.conn, "<message from='%s' to='%s' type='%s' xml:lang='en'>"+"<body>%s</body></message>",
+		xmlEscape(c.jid), xmlEscape(chat.Remote), xmlEscape(chat.Type), xmlEscape(chat.Text))
 }
 
 // SendOrg sends the original text without being wrapped in an XMPP message stanza.
